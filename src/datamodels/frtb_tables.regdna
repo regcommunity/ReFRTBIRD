@@ -164,7 +164,7 @@
 			
 			@long_name(long_name="Asset_backed_security")
 			class BIRD_ABS_ELDM {
-				id String   Debt_security_type_uniqueID
+				id String   BIRD_ABS_ELDM_uniqueID
 				@long_name(long_name="Rating_grade_credit_quality")
 				RTNG_GRD_CRDT_QLTY_domain  RTNG_GRD_CRDT_QLTY 
 				refers BIRD_SCRTSTN_NN_CRRLTN_TRDNG_PRTFL_RSK_FCTR_FR_STNDRDSD_APPRCH_ELDM  Asset_backed_security_has_Securitisation_non_correlation_trading_portfolio_non_CTP_Risk_Factor_for_standardised_approach_2wayassociation opposite BIRD_SCRTSTN_NN_CRRLTN_TRDNG_PRTFL_RSK_FCTR_FR_STNDRDSD_APPRCH_ELDM.linked_BIRD_ABS_ELDM 
@@ -178,7 +178,7 @@
 			
 			@long_name(long_name="Party_role")
 			class BIRD_PRTY_RL_ELDM  {
-				id String   Entity_role_type_uniqueID 
+				id String   BIRD_PRTY_RL_ELDM_uniqueID 
 				refers BIRD_PRTY_ELDM [1..1] linked_BIRD_PRTY_ELDM opposite BIRD_PRTY_ELDM.Party_acts_in_Party_role_2wayassociation 
 			}
 			
@@ -191,17 +191,6 @@
 			
 			@long_name(long_name="Security_and_exchange_tradable_derivative")
 			class BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_ELDM {
-				@key(is_primary_key="true")
-				@long_name(long_name="Security_identifier")
-				String   SCRTY_ID 
-				@key(is_primary_key="true")
-				@long_name(long_name="Security_Reference_date")
-				Date   SCRTY_RFRNC_DT 
-				@long_name(long_name="Security_and_exchange_tradable_derivative_type")
-				SCRTY_EXCHNG_TRDBL_DRVTV_TYP_domain  SCRTY_EXCHNG_TRDBL_DRVTV_TYP 
-				@key(is_primary_key="true")
-				@long_name(long_name="Security_Reporting_agent_identifier")
-				String   SCRTY_RPRTNG_AGNT_ID 
 				refers BIRD_SCRTY_ISSR_ASSGNMNT_ELDM [1..1] Security_and_exchange_tradable_derivative_is_issued_by_Issuer_via_Security_Issuer_assignment_2wayassociation opposite BIRD_SCRTY_ISSR_ASSGNMNT_ELDM.linked_BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_ELDM 
 				id String   BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_ELDM_uniqueID 
 			}
@@ -209,7 +198,6 @@
 			class BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_PSTN_ELDM {
 				id String   BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_PSTN_ELDM_uniqueID 
 				refers BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_ETD_OR_SCRTY_PSTNS_ELDM [0..-1] Exchange_tradable_derivative_position_specifies_Fundamental_review_of_the_trading_book_standard_approach_risk_measure_for_ETD_positions_2wayassociation opposite BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_ETD_OR_SCRTY_PSTNS_ELDM.linked_BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_PSTN_ELDM 
-				
 			}
 			
 			@long_name(long_name="Equity_security")
@@ -224,24 +212,7 @@
 			}
 
 			@long_name(long_name="Party")
-			class BIRD_PRTY_ELDM {
-				@key(is_primary_key="true")
-				@long_name(long_name="Party_identifier")
-				String   PRTY_ID 
-				@key(is_primary_key="true")
-				@long_name(long_name="Party_Reference_date")
-				Date   PRTY_RFRNC_DT 
-				@long_name(long_name="Institutional_sector")
-				INSTTTNL_SCTR_domain  INSTTTNL_SCTR 
-				@key(is_primary_key="true")
-				@long_name(long_name="Party_Reporting_agent_identifier")
-				String   PRTY_RPRTNG_AGNT_ID 
-				@long_name(long_name="Party_type")
-				PRTY_TYP_domain  PRTY_TYP 
-				@long_name(long_name="Party_type_by_address")
-				PRTY_TYP_ADDRSS_domain  PRTY_TYP_ADDRS 
-				@long_name(long_name="Economic_activity")
-				ECNMC_ACTVTY_domain  ECNMC_ACTVTY 
+			class BIRD_PRTY_ELDM {				
 				id String   BIRD_PRTY_ELDM_uniqueID
 				refers BIRD_PRTY_RL_ELDM [0..-1] Party_acts_in_Party_role_2wayassociation opposite BIRD_PRTY_RL_ELDM.linked_BIRD_PRTY_ELDM 
 			}
@@ -249,15 +220,6 @@
 		
 			@long_name(long_name="Over_the_counter_OTC_Derivative_instrument")
 			class BIRD_OTC_DRVTV_INSTRMNT_ELDM  {
-				id String   Instrument_type_by_product_uniqueID
-				@key(is_primary_key="true")
-				@long_name(long_name="Instrument_identifier")
-				String   INSTRMNT_ID 
-				@key(is_primary_key="true")
-				@long_name(long_name="Instrument_Reference_date")
-				Date   INSTRMNT_RFRNC_DT 
-				@key(is_primary_key="true")
-				@long_name(long_name="Instrument_Reporting_agent_identifier")
-				String   INSTRMNT_RPRTNG_AGNT_ID  
+				id String   BIRD_OTC_DRVTV_INSTRMNT_ELDM_uniqueID				
 				refers BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_OTC_PSTNS_ELDM [0..-1] Over_the_counter_OTC_Derivative_instrument_specifies_Fundamental_review_of_the_trading_book_standard_approach_risk_measure_for_OTC_positions_2wayassociation opposite BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_OTC_PSTNS_ELDM.linked_BIRD_OTC_DRVTV_INSTRMNT_ELDM 
 			}
