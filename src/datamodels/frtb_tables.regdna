@@ -114,31 +114,18 @@
 			
 			@long_name(long_name="Credit_spread_risk_CSR_non_securitisation_risk_factor_for_standardised_approach")
 			class BIRD_CRDT_SPRD_RSK_NN_SCRTSTN_RSK_FCTR_STNDRDSD_APPRCH_ELDM extends BIRD_RSK_FAC_SA_ELDM {
-				@long_name(long_name="Issuer_identifier")
-				String   ISSR_ID 
+				
 				@long_name(long_name="Credit_spread_risk_CSR_credit_quality")
 				RTNG_GRD_CRDT_QLTY_domain  CRDT_SPRD_RSK_CRDT_QLTY 
 				@long_name(long_name="Credit_spread_risk_CSR_curve_type")
-				CSR_CRV_TYP_domain  CRDT_SPRD_RSK_CRV_TYP 
-				@long_name(long_name="Issuer_Reference_date")
-				Date   ISSR_RFRNC_DT 
-				@long_name(long_name="Issuer_Reporting_agent_identifier")
-				String   ISSR_RPRTNG_AGNT_ID 
-				@long_name(long_name="Issuer_role_type")
-				ENTTY_RL_TYP_domain  ISSR_RL_TYP 
+				CSR_CRV_TYP_domain  CRDT_SPRD_RSK_CRV_TYP 				
 				refers BIRD_ISSR_ELDM [1..1] linked_BIRD_ISSR_ELDM opposite BIRD_ISSR_ELDM.Issuer_has_Credit_spread_risk_CSR_non_securitisation_risk_factor_for_standardised_approach_2wayassociation 
 			}
 			
 			@long_name(long_name="Equity_risk_factor_for_standardised_approach")
-			class BIRD_EQTY_RSK_FCTR_ELDM extends BIRD_RSK_FAC_SA_ELDM {
-				@long_name(long_name="Equity_Security_Reporting_agent_identifier")
-				String   EQTY_SCRTY_RPRTNG_AGNT_ID 
-				@long_name(long_name="Equity_Security_identifier")
-				String   EQTY_SCRTY_ID 
+			class BIRD_EQTY_RSK_FCTR_ELDM extends BIRD_RSK_FAC_SA_ELDM {				
 				@long_name(long_name="Equity_factor_type")
-				EQUTY_FCTR_TYP_domain  EQUTY_FCTR_TYP 
-				@long_name(long_name="Equity_Security_Reference_date")
-				Date   EQTY_SCRTY_RFRNC_DT 
+				EQUTY_FCTR_TYP_domain  EQUTY_FCTR_TYP 				
 				refers BIRD_EQTY_SCRTY_ELDM [1..1] linked_BIRD_EQTY_SCRTY_ELDM opposite BIRD_EQTY_SCRTY_ELDM.Equity_security_has_Equity_risk_factor_for_standardised_approach_2wayassociation 
 			}
 			
@@ -166,54 +153,12 @@
 			}
 			
 			@long_name(long_name="Fundamental_review_of_the_trading_book_standard_approach_risk_measure_for_ETD_positions")
-			class BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_ETD_OR_SCRTY_PSTNS_ELDM extends Risk_measure_type_by_position {
-				@key(is_primary_key="true")
-				@long_name(long_name="Buyer_Party_Reference_date")
-				Date   BYR_PRTY_RFRNC_DT 
-				@key(is_primary_key="true")
-				@long_name(long_name="Seller_Party_role_type")
-				ENTTY_RL_TYP_domain  SLLR_PRTY_RL_TYP 
-				@key(is_primary_key="true")
-				@long_name(long_name="Seller_Party_Reference_date")
-				Date   SLLR_PRTY_RFRNC_DT 
-				@key(is_primary_key="true")
-				@long_name(long_name="Buyer_Party_identifier")
-				String   BYR_PRTY_ID 
-				@key(is_primary_key="true")
-				@long_name(long_name="Exchange_tradable_derivative_Security_Reference_date")
-				Date   EXCHNG_TRDBL_DRVTV_SCRTY_RFRNC_DT 
-				@key(is_primary_key="true")
-				@long_name(long_name="Exchange_tradable_derivative_Security_Reporting_agent_identifier")
-				String   EXCHNG_TRDBL_DRVTV_SCRTY_RPRTNG_AGNT_ID 
-				@key(is_primary_key="true")
-				@long_name(long_name="Buyer_Party_Reporting_agent_identifier")
-				String   BYR_PRTY_RPRTNG_AGNT_ID 
-				@key(is_primary_key="true")
-				@long_name(long_name="Seller_Party_Reporting_agent_identifier")
-				String   SLLR_PRTY_RPRTNG_AGNT_ID 
-				@key(is_primary_key="true")
-				@long_name(long_name="Exchange_tradable_derivative_Security_identifier")
-				String   EXCHNG_TRDBL_DRVTV_SCRTY_ID 
-				@key(is_primary_key="true")
-				@long_name(long_name="Buyer_Party_role_type")
-				ENTTY_RL_TYP_domain  BYR_PRTY_RL_TYP 
-				@key(is_primary_key="true")
-				@long_name(long_name="Seller_Party_identifier")
-				String   SLLR_PRTY_ID 
+			class BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_ETD_OR_SCRTY_PSTNS_ELDM extends Risk_measure_type_by_position {				
 				refers BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_PSTN_ELDM [1..1] linked_BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_PSTN_ELDM opposite BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_PSTN_ELDM.Exchange_tradable_derivative_position_specifies_Fundamental_review_of_the_trading_book_standard_approach_risk_measure_for_ETD_positions_2wayassociation 
 			}
 			
 			@long_name(long_name="Fundamental_review_of_the_trading_book_standard_approach_risk_measure_for_OTC_positions")
 			class BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_OTC_PSTNS_ELDM extends Risk_measure_type_by_position {
-				@key(is_primary_key="true")
-				@long_name(long_name="Instrument_Reporting_agent_identifier")
-				String   INSTRMNT_RPRTNG_AGNT_ID 
-				@key(is_primary_key="true")
-				@long_name(long_name="Instrument_Reference_date")
-				Date   INSTRMNT_RFRNC_DT 
-				@key(is_primary_key="true")
-				@long_name(long_name="Instrument_identifier")
-				String   INSTRMNT_ID 
 				refers BIRD_OTC_DRVTV_INSTRMNT_ELDM [1..1] linked_BIRD_OTC_DRVTV_INSTRMNT_ELDM opposite BIRD_OTC_DRVTV_INSTRMNT_ELDM.Over_the_counter_OTC_Derivative_instrument_specifies_Fundamental_review_of_the_trading_book_standard_approach_risk_measure_for_OTC_positions_2wayassociation 
 			}
 			
@@ -227,54 +172,18 @@
 			
 			@long_name(long_name="Issuer")
 			class BIRD_ISSR_ELDM extends BIRD_PRTY_RL_ELDM {
-				
 				refers BIRD_CRDT_SPRD_RSK_NN_SCRTSTN_RSK_FCTR_STNDRDSD_APPRCH_ELDM [0..-1] Issuer_has_Credit_spread_risk_CSR_non_securitisation_risk_factor_for_standardised_approach_2wayassociation opposite BIRD_CRDT_SPRD_RSK_NN_SCRTSTN_RSK_FCTR_STNDRDSD_APPRCH_ELDM.linked_BIRD_ISSR_ELDM 
 				refers BIRD_SCRTY_ISSR_ASSGNMNT_ELDM [0..-1] Issuer_issues_Security_or_Exchange_tradable_derivative_s_via_Security_Issuer_assignment_2wayassociation opposite BIRD_SCRTY_ISSR_ASSGNMNT_ELDM.linked_BIRD_ISSR_ELDM 
 			}
 			
 			@long_name(long_name="Party_role")
 			class BIRD_PRTY_RL_ELDM  {
-				@key(is_primary_key="true")
-				@long_name(long_name="Party_role_type")
-				ENTTY_RL_TYP_domain  PRTY_RL_TYP 
-				@key(is_primary_key="true")
-				@long_name(long_name="Party_identifier")
-				String   PRTY_ID 
-				@key(is_primary_key="true")
-				@long_name(long_name="Party_Reference_date")
-				Date   PRTY_RFRNC_DT 
-				@key(is_primary_key="true")
-				@long_name(long_name="Party_Reporting_agent_identifier")
-				String   PRTY_RPRTNG_AGNT_ID 
-				@long_name(long_name="Rating_grade_credit_quality")
-				RTNG_GRD_CRDT_QLTY_domain  RTNG_GRD_CRDT_QLTY 
 				id String   Entity_role_type_uniqueID 
 				refers BIRD_PRTY_ELDM [1..1] linked_BIRD_PRTY_ELDM opposite BIRD_PRTY_ELDM.Party_acts_in_Party_role_2wayassociation 
 			}
 			
 			@long_name(long_name="Security_Issuer_assignment")
-			class BIRD_SCRTY_ISSR_ASSGNMNT_ELDM {
-				@key(is_primary_key="true")
-				@long_name(long_name="Reference_date")
-				Date   DT_RFRNC 
-				@key(is_primary_key="true")
-				@long_name(long_name="Reporting_agent_identifier")
-				String   RPRTNG_AGNT_ID 
-				@key(is_primary_key="true")
-				@long_name(long_name="Party_Reference_date")
-				Date   PRTY_RFRNC_DT 
-				@key(is_primary_key="true")
-				@long_name(long_name="Party_identifier")
-				String   PRTY_ID 
-				@key(is_primary_key="true")
-				@long_name(long_name="Party_role_type")
-				ENTTY_RL_TYP_domain  PRTY_RL_TYP 
-				@key(is_primary_key="true")
-				@long_name(long_name="Security_identifier")
-				String   SCRTY_ID 
-				@key(is_primary_key="true")
-				@long_name(long_name="Party_Reporting_agent_identifier")
-				String   PRTY_RPRTNG_AGNT_ID 				
+			class BIRD_SCRTY_ISSR_ASSGNMNT_ELDM {				
 				id String   BIRD_SCRTY_ENTTY_RL_ASSGNMNT_ELDM_uniqueID
 				refers BIRD_ISSR_ELDM [1..1] linked_BIRD_ISSR_ELDM opposite BIRD_ISSR_ELDM.Issuer_issues_Security_or_Exchange_tradable_derivative_s_via_Security_Issuer_assignment_2wayassociation 
 				refers BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_ELDM [1..1] linked_BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_ELDM opposite BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_ELDM.Security_and_exchange_tradable_derivative_is_issued_by_Issuer_via_Security_Issuer_assignment_2wayassociation 
