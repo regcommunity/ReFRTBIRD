@@ -1,5 +1,5 @@
 		 package frtb_tables
-		 import sdd_domains.*
+		 import frtb_domains.*
 		 import types.*
 		 annotation "key" as key
 		 annotation "dep" as dep
