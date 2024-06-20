@@ -1,0 +1,225 @@
+		 package input_tables
+		 import sdd_domains.*
+		 import types.*
+		 annotation "key" as key
+		 annotation "dep" as dep
+		 annotation "entity_hierarchy" as entity_hierarchy
+		 annotation "relationship_type" as relationship_type
+		 annotation "long_name" as long_name
+		 
+		 	abstract class Risk_measure_type {
+				refers BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_ELDM [1..1] parent_BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_ELDM opposite BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_ELDM.Risk_measure_type_delegate 
+				id String   Risk_measure_type_uniqueID 
+			}
+			
+		 	@long_name(long_name="Vega_sensitivity")
+			class BIRD_VG_SNSTVTY_ELDM extends Risk_measure_type {
+				@long_name(long_name="Underlying_residual_maturity")
+				double  UNDRLYNG_RSDL_MTRTY 
+				@long_name(long_name="Vega_sensitivity")
+				double  VG_SNSTVTY 
+				@long_name(long_name="Currency_of_record")
+				CRRNCY_domain  CRRNCY_RCRD 
+				@long_name(long_name="Option_maturity")
+				double  OPTN_MTRTY 
+			}
+			
+			@long_name(long_name="Curvature")
+			class BIRD_CRVTR_ELDM extends Risk_measure_type {
+				@long_name(long_name="Curvature_risk_weight")
+				double  CRVTR_RSK_WGHT 
+				@long_name(long_name="Shock_direction")
+				SHCK_DRCTN_domain  SHCK_DRCTN 
+				@long_name(long_name="Curvature_valuation_difference")
+				double  CRVTR_VLTN_DFFRNC 
+				@long_name(long_name="Currency_of_record")
+				CRRNCY_domain  CRRNCY_RCRD 
+			}
+			
+			@long_name(long_name="Delta_sensitivity")
+			class BIRD_DLT_SNSTVTY_ELDM extends Risk_measure_type {
+				@long_name(long_name="Currency_of_record")
+				CRRNCY_domain  CRRNCY_RCRD 
+				@long_name(long_name="Delta_sensitivity")
+				double  DLT_SNSTVTY 
+				@long_name(long_name="Tenor")
+				double  TNR 
+			}
+
+			@long_name(long_name="Fundamental_review_of_the_trading_book_standard_approach_risk_measure")
+			class BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_ELDM {
+				@long_name(long_name="Risk_factor_identifier")
+				String   RSK_FCTR_ID 
+				@long_name(long_name="Risk_factor_for_standardised_approach_Reporting_agent_identifier")
+				String   RSK_FCTR_STNDRDSD_APPRCH_RPRTNG_AGNT_ID 
+				@long_name(long_name="Risk_measure_type")
+				FRTB_RSK_MSR_TYP_domain  RSK_MSR_TYP 
+				@long_name(long_name="Risk_measure_type_by_position")
+				FRTB_RSK_MSR_TYP_domain  RSK_MSR_TYP_PSTN 
+				@long_name(long_name="Risk_factor_for_standardised_approach_Reference_date")
+				Date   RSK_FCTR_STNDRDSD_APPRCH_RFRNC_DT 
+				refers BIRD_RSK_FAC_SA_ELDM [1..1] linked_BIRD_RSK_FAC_SA_ELDM opposite BIRD_RSK_FAC_SA_ELDM.Fundamental_review_of_the_trading_book_standard_approach_risk_measure_has_risk_measure_in_Risk_factor_for_standardised_approach_2wayassociation 
+				refers Risk_measure_type  Risk_measure_type_delegate opposite Risk_measure_type.parent_BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_ELDM 
+				refers Risk_measure_type_by_position  Risk_measure_type_by_position_delegate opposite Risk_measure_type_by_position.parent_BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_ELDM 
+				id String   BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_ELDM_uniqueID 
+			}
+			
+			@long_name(long_name="Risk_factor_for_standardised_approach")
+			class BIRD_RSK_FAC_SA_ELDM {
+				@key(is_primary_key="true")
+				@long_name(long_name="Risk_factor_for_standardised_approach_Reference_date")
+				Date   RSK_FCTR_STNDRDSD_APPRCH_RFRNC_DT 
+				@key(is_primary_key="true")
+				@long_name(long_name="Risk_factor_for_standardised_approach_Reporting_agent_identifier")
+				String   RSK_FCTR_STNDRDSD_APPRCH_RPRTNG_AGNT_ID 
+				@key(is_primary_key="true")
+				@long_name(long_name="Risk_factor_identifier")
+				String   RSK_FCTR_ID 
+				@long_name(long_name="Risk_class")
+				RSK_CLSS_domain  RSK_CLSS 
+				refers BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_ELDM [0..-1] Fundamental_review_of_the_trading_book_standard_approach_risk_measure_has_risk_measure_in_Risk_factor_for_standardised_approach_2wayassociation opposite BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_ELDM.linked_BIRD_RSK_FAC_SA_ELDM 
+				id String   BIRD_RSK_FAC_SA_ELDM_uniqueID 
+			}
+			
+			@long_name(long_name="Foreign_exchange_risk_factor_for_standardised_approach")
+			class BIRD_FX_RSK_FACTR_SA_ELDM extends BIRD_RSK_FAC_SA_ELDM {
+				@long_name(long_name="Base_currency")
+				CRRNCY_domain  BS_CRRNCY 
+				@long_name(long_name="Currency")
+				CRRNCY_domain  CRRNCY 
+			}
+			
+			@long_name(long_name="Securitisation_correlation_trading_portfolio_CTP_Risk_Factor_for_standardised_approach")
+			class BIRD_SCRTSTN_CRRLTN_TRDNG_PRTFL_RSK_FCTR_STNDRDSD_APPRCH_ELDM extends BIRD_RSK_FAC_SA_ELDM {
+			}
+			
+			@long_name(long_name="Securitisation_non_correlation_trading_portfolio_non_CTP_Risk_Factor_for_standardised_approach")
+			class BIRD_SCRTSTN_NN_CRRLTN_TRDNG_PRTFL_RSK_FCTR_FR_STNDRDSD_APPRCH_ELDM extends BIRD_RSK_FAC_SA_ELDM {
+				@long_name(long_name="Asset_backed_Security_Reporting_agent_identifier")
+				String   ASST_BCKD_SCRTY_RPRTNG_AGNT_ID 
+				@long_name(long_name="Asset_backed_Security_Reference_date")
+				Date   ASST_BCKD_SCRTY_RFRNC_DT 
+				@long_name(long_name="Asset_backed_Security_identifier")
+				String   ASST_BCKD_SCRTY_ID 
+				refers BIRD_ABS_ELDM [1..1] linked_BIRD_ABS_ELDM opposite BIRD_ABS_ELDM.Asset_backed_security_has_Securitisation_non_correlation_trading_portfolio_non_CTP_Risk_Factor_for_standardised_approach_2wayassociation 
+			}
+			
+			@long_name(long_name="Commodity_risk_factor_for_standardised_approach")
+			class BIRD_CMMDTY_RSK_FCTR_FR_STNDRDSD_APPRCH_ELDM extends BIRD_RSK_FAC_SA_ELDM {
+				@long_name(long_name="Delivery_location")
+				String   DLVRY_LCTN 
+				@long_name(long_name="Commodity_type")
+				CMMDTY_TYP_FRTB_domain  CMMDTY_TYP 
+			}
+			
+			@long_name(long_name="Credit_spread_risk_CSR_non_securitisation_risk_factor_for_standardised_approach")
+			class BIRD_CRDT_SPRD_RSK_NN_SCRTSTN_RSK_FCTR_STNDRDSD_APPRCH_ELDM extends BIRD_RSK_FAC_SA_ELDM {
+				
+				@long_name(long_name="Credit_spread_risk_CSR_credit_quality")
+				RTNG_GRD_CRDT_QLTY_domain  CRDT_SPRD_RSK_CRDT_QLTY 
+				@long_name(long_name="Credit_spread_risk_CSR_curve_type")
+				CSR_CRV_TYP_domain  CRDT_SPRD_RSK_CRV_TYP 				
+				refers BIRD_ISSR_ELDM [1..1] linked_BIRD_ISSR_ELDM opposite BIRD_ISSR_ELDM.Issuer_has_Credit_spread_risk_CSR_non_securitisation_risk_factor_for_standardised_approach_2wayassociation 
+			}
+			
+			@long_name(long_name="Equity_risk_factor_for_standardised_approach")
+			class BIRD_EQTY_RSK_FCTR_ELDM extends BIRD_RSK_FAC_SA_ELDM {				
+				@long_name(long_name="Equity_factor_type")
+				EQUTY_FCTR_TYP_domain  EQUTY_FCTR_TYP 				
+				refers BIRD_EQTY_SCRTY_ELDM [1..1] linked_BIRD_EQTY_SCRTY_ELDM opposite BIRD_EQTY_SCRTY_ELDM.Equity_security_has_Equity_risk_factor_for_standardised_approach_2wayassociation 
+			}
+			
+			@long_name(long_name="Foreign_exchange_risk_factor_for_standardised_approach")
+			class BIRD_FX_RSK_FACTR_SA_ELDM extends BIRD_RSK_FAC_SA_ELDM {
+				@long_name(long_name="Base_currency")
+				CRRNCY_domain  BS_CRRNCY 
+				@long_name(long_name="Currency")
+				CRRNCY_domain  CRRNCY 
+			}
+			
+			@long_name(long_name="General_interest_rate_risk_GIRR_factor_for_standardised_approach")
+			class BIRD_GIRR_RSK_FCTR_ELDM extends BIRD_RSK_FAC_SA_ELDM {
+				@long_name(long_name="General_interest_rate_risk_GIRR_factor_type")
+				GIRR_RSK_FCTR_domain  GIRR_FCTR_TYP 
+				@long_name(long_name="Main_currency")
+				CRRNCY_domain  MN_CRRNCY 
+				@long_name(long_name="Second_currency")
+				CRRNCY_domain  SCND_CRRNCY 
+			}
+			
+			abstract class Risk_measure_type_by_position {
+				refers BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_ELDM [1..1] parent_BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_ELDM opposite BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_ELDM.Risk_measure_type_by_position_delegate 
+				id String   Risk_measure_type_by_position_uniqueID 
+			}
+			
+			@long_name(long_name="Fundamental_review_of_the_trading_book_standard_approach_risk_measure_for_ETD_positions")
+			class BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_ETD_OR_SCRTY_PSTNS_ELDM extends Risk_measure_type_by_position {				
+				refers BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_PSTN_ELDM [1..1] linked_BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_PSTN_ELDM opposite BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_PSTN_ELDM.Exchange_tradable_derivative_position_specifies_Fundamental_review_of_the_trading_book_standard_approach_risk_measure_for_ETD_positions_2wayassociation 
+			}
+			
+			@long_name(long_name="Fundamental_review_of_the_trading_book_standard_approach_risk_measure_for_OTC_positions")
+			class BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_OTC_PSTNS_ELDM extends Risk_measure_type_by_position {
+				refers BIRD_OTC_DRVTV_INSTRMNT_ELDM [1..1] linked_BIRD_OTC_DRVTV_INSTRMNT_ELDM opposite BIRD_OTC_DRVTV_INSTRMNT_ELDM.Over_the_counter_OTC_Derivative_instrument_specifies_Fundamental_review_of_the_trading_book_standard_approach_risk_measure_for_OTC_positions_2wayassociation 
+			}
+			
+			@long_name(long_name="Asset_backed_security")
+			class BIRD_ABS_ELDM {
+				id String   BIRD_ABS_ELDM_uniqueID
+				@long_name(long_name="Rating_grade_credit_quality")
+				RTNG_GRD_CRDT_QLTY_domain  RTNG_GRD_CRDT_QLTY 
+				refers BIRD_SCRTSTN_NN_CRRLTN_TRDNG_PRTFL_RSK_FCTR_FR_STNDRDSD_APPRCH_ELDM  Asset_backed_security_has_Securitisation_non_correlation_trading_portfolio_non_CTP_Risk_Factor_for_standardised_approach_2wayassociation opposite BIRD_SCRTSTN_NN_CRRLTN_TRDNG_PRTFL_RSK_FCTR_FR_STNDRDSD_APPRCH_ELDM.linked_BIRD_ABS_ELDM 
+			}
+			
+			@long_name(long_name="Issuer")
+			class BIRD_ISSR_ELDM extends BIRD_PRTY_RL_ELDM {
+				refers BIRD_CRDT_SPRD_RSK_NN_SCRTSTN_RSK_FCTR_STNDRDSD_APPRCH_ELDM [0..-1] Issuer_has_Credit_spread_risk_CSR_non_securitisation_risk_factor_for_standardised_approach_2wayassociation opposite BIRD_CRDT_SPRD_RSK_NN_SCRTSTN_RSK_FCTR_STNDRDSD_APPRCH_ELDM.linked_BIRD_ISSR_ELDM 
+				refers BIRD_SCRTY_ISSR_ASSGNMNT_ELDM [0..-1] Issuer_issues_Security_or_Exchange_tradable_derivative_s_via_Security_Issuer_assignment_2wayassociation opposite BIRD_SCRTY_ISSR_ASSGNMNT_ELDM.linked_BIRD_ISSR_ELDM 
+			}
+			
+			@long_name(long_name="Party_role")
+			class BIRD_PRTY_RL_ELDM  {
+				id String   BIRD_PRTY_RL_ELDM_uniqueID 
+				refers BIRD_PRTY_ELDM [1..1] linked_BIRD_PRTY_ELDM opposite BIRD_PRTY_ELDM.Party_acts_in_Party_role_2wayassociation 
+			}
+			
+			@long_name(long_name="Security_Issuer_assignment")
+			class BIRD_SCRTY_ISSR_ASSGNMNT_ELDM {				
+				id String   BIRD_SCRTY_ENTTY_RL_ASSGNMNT_ELDM_uniqueID
+				refers BIRD_ISSR_ELDM [1..1] linked_BIRD_ISSR_ELDM opposite BIRD_ISSR_ELDM.Issuer_issues_Security_or_Exchange_tradable_derivative_s_via_Security_Issuer_assignment_2wayassociation 
+				refers BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_ELDM [1..1] linked_BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_ELDM opposite BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_ELDM.Security_and_exchange_tradable_derivative_is_issued_by_Issuer_via_Security_Issuer_assignment_2wayassociation 
+			}
+			
+			@long_name(long_name="Security_and_exchange_tradable_derivative")
+			class BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_ELDM {
+				refers BIRD_SCRTY_ISSR_ASSGNMNT_ELDM [1..1] Security_and_exchange_tradable_derivative_is_issued_by_Issuer_via_Security_Issuer_assignment_2wayassociation opposite BIRD_SCRTY_ISSR_ASSGNMNT_ELDM.linked_BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_ELDM 
+				id String   BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_ELDM_uniqueID 
+			}
+			@long_name(long_name="Security_or_exchange_tradable_derivative_position")
+			class BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_PSTN_ELDM {
+				id String   BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_PSTN_ELDM_uniqueID 
+				refers BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_ETD_OR_SCRTY_PSTNS_ELDM [0..-1] Exchange_tradable_derivative_position_specifies_Fundamental_review_of_the_trading_book_standard_approach_risk_measure_for_ETD_positions_2wayassociation opposite BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_ETD_OR_SCRTY_PSTNS_ELDM.linked_BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_PSTN_ELDM 
+			}
+			
+			@long_name(long_name="Equity_security")
+			class BIRD_EQTY_SCRTY_ELDM extends BIRD_SCRTY_EXCHNG_TRDBL_DRVTV_ELDM {				
+				@long_name(long_name="Total_number_of_shares_issued")
+				int  TTL_NMBR_SHRS_ISSD 
+				@long_name(long_name="Total_amount_of_capital_issued")
+				int  TTL_AMNT_CPTL_ISSD 
+				@long_name(long_name="Rating_grade_credit_quality")
+				RTNG_GRD_CRDT_QLTY_domain  RTNG_GRD_CRDT_QLTY 
+				refers BIRD_EQTY_RSK_FCTR_ELDM  Equity_security_has_Equity_risk_factor_for_standardised_approach_2wayassociation opposite BIRD_EQTY_RSK_FCTR_ELDM.linked_BIRD_EQTY_SCRTY_ELDM 
+			}
+
+			@long_name(long_name="Party")
+			class BIRD_PRTY_ELDM {				
+				id String   BIRD_PRTY_ELDM_uniqueID
+				refers BIRD_PRTY_RL_ELDM [0..-1] Party_acts_in_Party_role_2wayassociation opposite BIRD_PRTY_RL_ELDM.linked_BIRD_PRTY_ELDM 
+			}
+			
+		
+			@long_name(long_name="Over_the_counter_OTC_Derivative_instrument")
+			class BIRD_OTC_DRVTV_INSTRMNT_ELDM  {
+				id String   BIRD_OTC_DRVTV_INSTRMNT_ELDM_uniqueID				
+				refers BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_OTC_PSTNS_ELDM [0..-1] Over_the_counter_OTC_Derivative_instrument_specifies_Fundamental_review_of_the_trading_book_standard_approach_risk_measure_for_OTC_positions_2wayassociation opposite BIRD_FNDMNTL_RVW_TRDNG_BK_STNDRD_APPRCH_RSK_MSR_OTC_PSTNS_ELDM.linked_BIRD_OTC_DRVTV_INSTRMNT_ELDM 
+			}
